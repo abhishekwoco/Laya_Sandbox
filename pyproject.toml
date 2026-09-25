@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "laya-mcp"
+version = "0.1.0"
+description = "MCP server that lets coding agents hand structured decisions to Laya"
+requires-python = ">=3.12"
+dependencies = [
+    "laya==0.3.7",
+    "fastmcp>=4,<5",
+    "fastapi>=0.141",
+    "uvicorn[standard]>=0.53",
+    "pydantic>=2.13",
+    "pydantic-settings>=2.15",
+    "sqlmodel>=0.0.47",
+    "alembic>=1.20",
+    "huey>=3.4",
+    "scikit-learn>=1.9",
+    "structlog>=26.1",
+    "prometheus-fastapi-instrumentator>=8.1",
+    "psutil>=7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9",
+    "pytest-asyncio>=1.4",
+]
+# langchain-mcp-adapters (<=0.3.2) needs mcp<2 while fastmcp 4 needs mcp 2.x, so the LangChain
+# client test runs from its own venv: see scripts/langchain_smoke.py and docs/langchain-client.md.
+
+[project.scripts]
+laya-mcp = "laya_mcp.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"laya_mcp.db.migrations" = ["script.py.mako"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "slow: loads a real Laya checkpoint (run with -m slow)",
+]
+addopts = "-m 'not slow'"

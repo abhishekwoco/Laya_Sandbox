@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "laya": {
+      "type": "http",
+      "url": "${LAYA_MCP_URL:-http://10.10.29.81:8765/mcp}",
+      "headers": {
+        "X-Laya-Team": "${LAYA_TEAM:-dev}"
+      }
+    }
+  }
+}

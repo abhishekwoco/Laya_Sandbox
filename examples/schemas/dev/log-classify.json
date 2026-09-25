@@ -1,0 +1,41 @@
+{
+  "name": "log-classify",
+  "description": "Classify a single log line or short log excerpt by category, severity, and whether it warrants human action. State: the raw log line(s) as plain text.",
+  "questions": {
+    "category": {
+      "type": "choice",
+      "instructions": "What kind of log entry is this?",
+      "criteria": {
+        "error": "an exception, stack trace, or explicit failure",
+        "warning": "a recoverable problem or a deprecation notice",
+        "security": "auth failures, access violations, suspicious activity",
+        "performance": "slow queries, timeouts, resource exhaustion",
+        "info": "routine informational or lifecycle logging",
+        "other": "none of the above"
+      }
+    },
+    "severity": {
+      "type": "score",
+      "instructions": "How severe is this log entry?",
+      "criteria": [
+        "noise: safe to ignore",
+        "low: worth noting, no immediate action",
+        "high: should be investigated soon",
+        "critical: needs immediate attention, likely user-facing impact"
+      ]
+    },
+    "actionable": {
+      "type": "noul",
+      "instructions": "Does this log entry describe something a human should act on (investigate, fix, or escalate), as opposed to routine, expected, or already-handled noise?",
+      "criteria": {
+        "true": "warrants a human looking at it",
+        "false": "routine, expected, or already handled"
+      }
+    }
+  },
+  "targets": {
+    "min_accuracy": 0.9,
+    "min_examples": 50,
+    "per_question": {}
+  }
+}

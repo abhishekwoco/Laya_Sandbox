@@ -1,0 +1,11 @@
+{
+  "name": "laya",
+  "displayName": "Laya decisions",
+  "version": "0.1.0",
+  "description": "Connects Claude Code to WoCo's shared Laya MCP server and teaches it to offload mechanical decisions (classification, triage, tagging, scoring, yes/no checks, injection screening) to Laya, reasoning itself only about what Laya is unsure of.",
+  "author": {
+    "name": "WoCo",
+    "email": "aashutosh.kumar@woco.co.in"
+  },
+  "keywords": ["laya", "mcp", "classification", "triage", "decisions"]
+}

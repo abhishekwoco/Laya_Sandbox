@@ -1,0 +1,49 @@
+{
+  "name": "source-relevance",
+  "description": "Score a research source (a doc page, article, code file, or paper) found while investigating a topic, to filter search/research results before a human or agent reads them in full. State should include the source excerpt and, when available, the research question it's being checked against, e.g. {\"query\": \"...\", \"source\": \"...\"}.",
+  "questions": {
+    "relevance": {
+      "type": "score",
+      "instructions": "How relevant is this source to the research question given in `query`?",
+      "criteria": [
+        "not relevant: off-topic",
+        "tangential: touches the topic but doesn't answer the question",
+        "relevant: directly addresses the question",
+        "highly relevant: directly and thoroughly addresses the question"
+      ]
+    },
+    "source_type": {
+      "type": "choice",
+      "instructions": "What kind of source is this?",
+      "criteria": {
+        "official_docs": "vendor or project documentation, API reference, or spec",
+        "source_code": "actual code, a repository, or inline code comments",
+        "blog_post": "an individual's or company's blog or article",
+        "forum_qa": "Stack Overflow, forums, Q&A sites, mailing lists",
+        "academic_paper": "peer-reviewed or preprint research",
+        "other": "none of the above"
+      }
+    },
+    "is_outdated": {
+      "type": "noul",
+      "instructions": "Does this source describe a version, API, or state of the world that looks superseded or no longer current?",
+      "criteria": {
+        "true": "looks stale or superseded",
+        "false": "looks current"
+      }
+    },
+    "authoritative": {
+      "type": "noul",
+      "instructions": "Does this source come from an authoritative origin for the topic (the project's own maintainers or docs, a recognized standard, or a primary source), rather than a secondary summary or unverified opinion?",
+      "criteria": {
+        "true": "a primary or authoritative source",
+        "false": "a secondary, unverified, or opinion source"
+      }
+    }
+  },
+  "targets": {
+    "min_accuracy": 0.85,
+    "min_examples": 50,
+    "per_question": {}
+  }
+}

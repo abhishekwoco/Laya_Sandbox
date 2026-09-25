@@ -1,0 +1,62 @@
+{
+  "name": "issue-triage",
+  "description": "Triage an incoming issue or ticket into area, type, severity, and whether it needs a repro or looks like a duplicate. State: the issue title + body (and comments, if useful) as plain text or {\"title\":..,\"body\":..}.",
+  "questions": {
+    "area": {
+      "type": "choice",
+      "instructions": "Which part of the system does this issue concern?",
+      "criteria": {
+        "frontend": "UI, client-side rendering, browser behavior",
+        "backend": "server-side logic, APIs, business rules",
+        "infra": "deployment, CI/CD, servers, networking, scaling",
+        "data": "database schema, migrations, data quality, reporting",
+        "docs": "documentation, README, comments, onboarding material",
+        "other": "none of the above, or spans multiple areas"
+      }
+    },
+    "type": {
+      "type": "choice",
+      "instructions": "What kind of issue is this?",
+      "criteria": {
+        "bug": "something that used to work, or should work, is broken",
+        "feature": "a request for new functionality that doesn't exist yet",
+        "question": "someone is asking how something works or should work",
+        "chore": "maintenance, refactor, dependency bump, or cleanup with no user-facing behavior change"
+      }
+    },
+    "severity": {
+      "type": "score",
+      "instructions": "How severe is this issue's impact if it stays unresolved?",
+      "criteria": [
+        "cosmetic or trivial: no functional impact",
+        "minor: a workaround exists, or it affects few users",
+        "major: no workaround, affects many users or a core workflow",
+        "critical: data loss, security exposure, or a full outage"
+      ]
+    },
+    "needs_repro": {
+      "type": "noul",
+      "instructions": "Is this issue missing clear steps to reproduce, so someone would have to ask the reporter for more information before it can be worked on?",
+      "criteria": {
+        "true": "reproduction steps are missing or too vague to act on",
+        "false": "reproduction steps are clear, or none are needed (e.g. a feature request)"
+      }
+    },
+    "duplicate_likely": {
+      "type": "noul",
+      "instructions": "Does this report read like a common, well-worn class of complaint or request (the kind that's often already been filed), rather than something novel or specific to this codebase?",
+      "criteria": {
+        "true": "reads like a generic, likely-already-filed complaint or request",
+        "false": "reads like a specific or unusual report"
+      }
+    }
+  },
+  "targets": {
+    "min_accuracy": 0.9,
+    "min_examples": 50,
+    "per_question": {
+      "needs_repro": 0.85,
+      "duplicate_likely": 0.75
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "task-tagging",
+  "description": "Tag a planning task or ticket with area, effort, risk, and whether other work is blocked on it. State: the task title + description as plain text or {\"title\":..,\"body\":..}.",
+  "questions": {
+    "area": {
+      "type": "choice",
+      "instructions": "Which part of the system does this task concern?",
+      "criteria": {
+        "frontend": "UI, client-side rendering, browser behavior",
+        "backend": "server-side logic, APIs, business rules",
+        "infra": "deployment, CI/CD, servers, networking, scaling",
+        "data": "database schema, migrations, data quality, reporting",
+        "docs": "documentation, README, comments, onboarding material",
+        "other": "none of the above, or spans multiple areas"
+      }
+    },
+    "effort": {
+      "type": "score",
+      "instructions": "How much engineering effort does this task look like it needs (t-shirt size)?",
+      "criteria": [
+        "XS: minutes to a couple hours, a trivial change",
+        "S: about a day, a small well-scoped change",
+        "M: a few days, moderate scope or some unknowns",
+        "L: one to two weeks, significant scope or a cross-cutting change",
+        "XL: multiple weeks, large or poorly-understood scope"
+      ]
+    },
+    "risk": {
+      "type": "score",
+      "instructions": "How risky is this task: chance of breaking something, needing rework, or hitting unknowns?",
+      "criteria": [
+        "low: well-understood, isolated change",
+        "medium: touches shared code or has some unknowns",
+        "high: touches critical paths or data, or has significant unknowns"
+      ]
+    },
+    "blocking": {
+      "type": "noul",
+      "instructions": "Does this task's description say or imply that other work is waiting on it?",
+      "criteria": {
+        "true": "other work is blocked on this",
+        "false": "nothing described as waiting on this"
+      }
+    }
+  },
+  "targets": {
+    "min_accuracy": 0.85,
+    "min_examples": 50,
+    "per_question": {}
+  }
+}
