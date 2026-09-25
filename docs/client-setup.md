@@ -23,10 +23,12 @@ namespaces (`team/name`) to your team. Pick one of: `dev`, `support`,
 
 The plugin registers the server *and* adds two skills: `laya` (when and how to hand
 decisions to Laya) and `laya-setup` (connect, switch team, troubleshoot). It is served
-from the `woco` marketplace, a shared folder on the Laya host:
+from the `woco` marketplace in the private GitHub repo `abhishekwoco/Laya_Sandbox` (you
+need read access, and `git clone https://github.com/abhishekwoco/Laya_Sandbox` must work
+without a password prompt):
 
 ```bash
-claude plugin marketplace add "\\DESKTOP-QF8TM70\laya-plugins"
+claude plugin marketplace add abhishekwoco/Laya_Sandbox
 claude plugin install laya@woco
 ```
 

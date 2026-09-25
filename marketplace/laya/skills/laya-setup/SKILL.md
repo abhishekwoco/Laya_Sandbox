@@ -88,19 +88,40 @@ namespaced by it (`support/ticket-intake`).
 
 ## Installing
 
-The plugin comes from the `woco` marketplace, a shared folder on the Laya host
-(`\\DESKTOP-QF8TM70\laya-plugins`, or wherever the host owner shared
-`D:\Laya_Sandbox\marketplace`):
+The plugin comes from the `woco` marketplace in the private GitHub repo
+`abhishekwoco/Laya_Sandbox`:
 
 ```bash
-claude plugin marketplace add "\\DESKTOP-QF8TM70\laya-plugins"
+claude plugin marketplace add abhishekwoco/Laya_Sandbox
 claude plugin install laya@woco
 ```
 
-(Or `/plugin marketplace add ...` and `/plugin install laya@woco` inside a session.) If the
-UNC path isn't accepted, map the share to a drive letter first and add that path. The
-share only needs to be reachable when installing or updating
-(`claude plugin marketplace update woco` then `claude plugin update laya@woco`).
+(Or `/plugin marketplace add ...` and `/plugin install laya@woco` inside a session.)
+The repo is private, so this uses the user's own git credentials:
+
+- They need read access to the repo (ask the repo owner to add them).
+- `git clone https://github.com/abhishekwoco/Laya_Sandbox` must work in a terminal
+  without prompting. If it doesn't, sign in once with Git Credential Manager (bundled
+  with Git for Windows) or `gh auth login` followed by `gh auth setup-git`. Claude Code
+  never prompts for credentials, so an unauthenticated add simply fails.
+- If SSH keys aren't set up and the add hangs or fails on SSH, set
+  `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
+
+Updates: `claude plugin marketplace update woco`, then `claude plugin update laya@woco`.
+Background auto-updates of a private marketplace only work when git can authenticate
+non-interactively (a credential helper such as `gh`'s), not from a token env var alone.
+
+A repo can also offer the plugin to everyone who opens it: add to that repo's
+`.claude/settings.json` (merge with what's there):
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "woco": { "source": { "source": "github", "repo": "abhishekwoco/Laya_Sandbox" } }
+  },
+  "enabledPlugins": { "laya@woco": true }
+}
+```
 
 Without the plugin (tools only, no skills):
 

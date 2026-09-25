@@ -100,11 +100,12 @@ step so other machines can reach it. Running it as a boot-time service
 
 ### Add it to Claude Code
 
-Recommended: the `laya` plugin (MCP server + usage and setup skills), from the shared
-`marketplace/` folder:
+Recommended: the `laya` plugin (MCP server + usage and setup skills), from this private
+GitHub repo (needs read access and working git credentials; see
+[marketplace/README.md](marketplace/README.md)):
 
 ```
-claude plugin marketplace add "\\DESKTOP-QF8TM70\laya-plugins"
+claude plugin marketplace add abhishekwoco/Laya_Sandbox
 claude plugin install laya@woco
 ```
 

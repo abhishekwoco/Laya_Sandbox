@@ -5,12 +5,12 @@
     "email": "abhishek.kagra@woco.co.in"
   },
   "metadata": {
-    "description": "WoCo internal Claude Code plugins"
+    "description": "WoCo internal Claude Code plugins (install from GitHub: abhishekwoco/Laya_Sandbox)"
   },
   "plugins": [
     {
       "name": "laya",
-      "source": "./laya",
+      "source": "./marketplace/laya",
       "description": "Hand structured decisions (classify, triage, tag, score, yes/no checks) to the shared Laya classifier over MCP, and set up the connection.",
       "version": "0.1.1"
     }
