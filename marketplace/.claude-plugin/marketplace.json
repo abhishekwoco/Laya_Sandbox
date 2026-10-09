@@ -17,7 +17,7 @@
     {
       "name": "laya-support",
       "source": "./laya-support",
-      "description": "Support team toolkit: one-word commands (triage / chase / labels) that read the support Slack channel, classify issues with Laya, and draft the digest, nudges and dataset updates for approval. Do not install together with the laya plugin.",
+      "description": "Support team toolkit: slash commands (/triage, /chase, /labels) that read the support Slack channel, classify issues with Laya, and draft the digest, nudges and dataset updates for approval. Do not install together with the laya plugin.",
       "version": "0.1.0"
     }
   ]

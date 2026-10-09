@@ -1,33 +1,33 @@
 # laya-support
 
 The WoCo support team's daily toolkit. After installing, you drive everything with
-**three one-word commands** typed into Claude Code — no prompt writing:
+**three slash commands** typed into Claude Code — no prompt writing:
 
-| You type | What happens |
+| Command | What happens |
 |---|---|
-| `triage` | Reads the support channel since the last digest, classifies every issue with Laya (bug vs config, urgency, resolved, escalation, channel rules), finds duplicates, and shows you a digest **draft**. You approve, it posts. |
-| `chase` | Finds unresolved issues that have gone quiet for 24h+ where the ball is with dev, and drafts polite in-thread reminders. You approve each one. |
-| `labels` | Collects the corrections your team replied under past digests ("2 = config", "3 resolved") and saves them as training examples, so Laya keeps getting better at your tickets. |
+| `/triage` | Reads the support channel since the last digest, classifies every issue with Laya (bug vs config, urgency, resolved, escalation, channel rules), finds duplicates, and shows you a digest **draft**. You approve, it posts. |
+| `/chase` | Finds unresolved issues silent for 24h+ where the ball is with dev, and drafts polite in-thread reminders. You approve each one. |
+| `/labels` | Collects the corrections your team replied under past digests ("2 = config", "3 resolved") and turns them into Laya training examples, so Laya keeps getting better at your tickets. |
 
-Default channel is **#errors-bugs**; say `triage #some-channel` to point elsewhere.
-Once a day, the first Claude session you open will also offer to run the digest —
-say no and it won't ask again until tomorrow.
+Default channel is **#errors-bugs**; pass a channel to point elsewhere:
+`/triage #support-helpdesk`. Once a day, the first Claude session you open also
+offers to run the digest — say no and it won't ask again until tomorrow.
 
-Nothing is ever posted to Slack without showing you the exact message and getting
-your yes.
+These commands use the Laya server on the WoCo intranet, so they work in Claude
+Code / Claude Cowork on the office network only. Nothing is ever posted to Slack
+without showing you the exact message and getting your yes.
 
 ## Install (one time, ~2 minutes)
 
 Requirements: Claude Code desktop app, the **Slack connector** enabled in your
-Claude settings, and being on the WoCo office network (the Laya server is
-intranet-only). Windows only for now (the hooks are PowerShell).
+Claude settings, and being on the WoCo office network.
 
 ```bash
 claude plugin marketplace add abhishekwoco/Laya_Sandbox
 claude plugin install laya-support@woco
 ```
 
-Restart Claude Code. Type `triage` to test.
+Restart Claude Code. Type `/triage` to test.
 
 Notes:
 
@@ -41,23 +41,24 @@ Notes:
 ## What's inside
 
 ```
-hooks/hooks.json     the two hooks (no other automation runs on your machine)
-hooks/expand.ps1     turns triage/chase/labels into the full recipe for Claude
-hooks/daily.ps1      once-a-day digest offer on your first session (stamp files
-                     in ~/.laya-support/)
-recipes/*.md         the actual instructions Claude follows — readable, editable
-.mcp.json            the Laya server connection (team: support)
+skills/triage/SKILL.md   the /triage workflow — readable, editable markdown
+skills/chase/SKILL.md    the /chase workflow
+skills/labels/SKILL.md   the /labels workflow
+hooks/hooks.json         one hook: the daily nudge (no other automation runs)
+hooks/daily.ps1          once-a-day /triage offer on your first session
+                         (stamp files in ~/.laya-support/; Windows/PowerShell)
+.mcp.json                the Laya server connection (team: support)
 ```
 
-Local files the recipes create on your machine: `~/.laya-support/runs/*.json`
-(each day's triage items + answers; the labels sweep needs them) and
+Local files the skills create on your machine: `~/.laya-support/runs/*.json`
+(each day's triage items + answers; the /labels sweep needs them) and
 `~/.laya-support/dataset-log.json` (which examples were already saved).
 
 ## For maintainers
 
-- The recipes start with ad-hoc `laya_classify` questions. Once the support
+- The skills start with ad-hoc `laya_classify` questions. Once the support
   dataset reaches 50+ labeled examples, run the schema lifecycle (save →
-  evaluate → calibrate → promote `support/ticket-intake`); the triage recipe
+  evaluate → calibrate → promote `support/ticket-intake`); the /triage skill
   automatically switches to `laya_decide` when it finds the trusted schema.
 - Update flow: bump `version` in `.claude-plugin/plugin.json` and the two
   marketplace.json files, push; members get it via

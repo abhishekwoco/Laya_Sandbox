@@ -1,16 +1,21 @@
-# Recipe: stale-issue chaser
+---
+name: chase
+description: Find WoCo support issues that are unresolved and silent for 24h+ where the dev side owes a reply, and draft polite in-thread reminder nudges for the user's approval. Use when the user invokes /chase or asks to chase stale support issues. Arguments may name a channel (e.g. "/chase #support-helpdesk").
+---
+
+# Stale-issue chaser
 
 Find support issues that are still open and have gone quiet, and draft polite
 in-thread nudges. Drafts only — the user approves every message before it is sent.
 
 ## 1. Collect
 
-- Channel: named in the user's message, else **#errors-bugs** (resolve with
+- Channel: named in the arguments, else **#errors-bugs** (resolve with
   `slack_search_channels`).
 - Prefer today's run file `~/.laya-support/runs/<YYYY-MM-DD>.json` (or yesterday's)
   as the issue list — it already has condensed items and resolved/unresolved
-  answers. If no run file exists, collect and classify exactly as in the triage
-  recipe (steps 1–3), questions `resolved` and `category` only.
+  answers. If no run file exists, collect and classify exactly as in the /triage
+  skill (steps 1–3), questions `resolved` and `category` only.
 
 ## 2. Select what to chase
 

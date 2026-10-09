@@ -1,4 +1,9 @@
-# Recipe: daily support triage digest
+---
+name: triage
+description: Run the WoCo support team's daily triage digest - read the support Slack channel and its threads, classify every issue with Laya (bug vs config, urgency, resolved, escalation, channel rules), pair duplicates, and draft one digest message for the user's approval. Use when the user invokes /triage or asks to run the daily support triage. Arguments may name a channel (e.g. "/triage #support-helpdesk").
+---
+
+# Daily support triage digest
 
 You are running the WoCo support team's daily triage. Follow these steps exactly.
 Everything that posts to Slack is a DRAFT the user approves first — never send
@@ -6,7 +11,7 @@ without showing the final text and getting a yes in chat.
 
 ## 0. Channel and window
 
-- Channel: if the user's message names a channel (e.g. "triage #support-helpdesk"),
+- Channel: if the arguments name a channel (e.g. `/triage #support-helpdesk`),
   use that. Otherwise default to **#errors-bugs**. Resolve the id with
   `slack_search_channels`.
 - Dedup guard: read the latest ~30 channel messages first. If one already contains
@@ -116,7 +121,7 @@ Corrections? Reply in this thread like "2 = config" or "3 resolved" — replies 
 Omit empty sections. ✱ = Laya was unsure, judgement applied. Keep the digest under
 ~40 lines; link instead of quoting.
 
-## 6. Save the run file (required — the labels sweep depends on it)
+## 6. Save the run file (required — the /labels sweep depends on it)
 
 Write the full run to `~/.laya-support/runs/<YYYY-MM-DD>.json`: the channel, window,
 every condensed item, Laya's raw answers (with confidences/status), and your final

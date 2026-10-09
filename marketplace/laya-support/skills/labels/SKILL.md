@@ -1,4 +1,9 @@
-# Recipe: labels sweep (grow the support dataset from digest corrections)
+---
+name: labels
+description: Grow the WoCo support team's Laya training dataset from digest corrections - parse replies like "2 = config" under past Laya triage digests in Slack, join them with the stored run files, and save complete labeled examples to the support dataset after the user's approval. Use when the user invokes /labels or asks to run the labels sweep / save digest corrections.
+---
+
+# Labels sweep (grow the support dataset from digest corrections)
 
 Turn the team's replies on past triage digests into labeled examples for the
 `ticket-intake` dataset, so Laya's support schema can be evaluated, calibrated and
@@ -6,7 +11,7 @@ promoted. Nothing is saved without showing the user the final example list.
 
 ## 1. Gather corrections
 
-- Channel: named in the user's message, else **#errors-bugs**.
+- Channel: named in the arguments, else **#errors-bugs**.
 - Find `Laya triage —` digest messages from the last 14 days (`slack_read_channel`,
   look for the marker text).
 - For each digest, `slack_read_thread` and parse correction replies. Expected

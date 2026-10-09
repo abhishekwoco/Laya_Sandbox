@@ -1,17 +1,6 @@
 {
-  "description": "WoCo support shortcuts: expands the one-word commands triage / chase / labels into full Laya+Slack recipes, and nudges once per day (first session) to run the triage digest.",
+  "description": "WoCo support: once per day (first session), nudge Claude to offer the /triage digest. The triage/chase/labels workflows themselves are skills (slash commands), not hooks.",
   "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PLUGIN_ROOT}/hooks/expand.ps1"]
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "matcher": "startup",
