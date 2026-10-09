@@ -1,0 +1,11 @@
+{
+  "name": "laya-support",
+  "displayName": "Laya for Support",
+  "version": "0.1.0",
+  "description": "The WoCo support team's daily toolkit: one-word commands (triage / chase / labels) that read the support Slack channel, classify every issue with Laya (bug vs config, urgency, resolved, escalation), and draft the digest, nudges and dataset updates for you to approve. No prompt writing needed.",
+  "author": {
+    "name": "WoCo",
+    "email": "abhishek.kagra@woco.co.in"
+  },
+  "keywords": ["laya", "support", "slack", "triage", "hooks"]
+}

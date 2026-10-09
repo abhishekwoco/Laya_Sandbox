@@ -13,6 +13,12 @@
       "source": "./marketplace/laya",
       "description": "Hand structured decisions (classify, triage, tag, score, yes/no checks) to the shared Laya classifier over MCP, and set up the connection.",
       "version": "0.1.1"
+    },
+    {
+      "name": "laya-support",
+      "source": "./marketplace/laya-support",
+      "description": "Support team toolkit: one-word commands (triage / chase / labels) that read the support Slack channel, classify issues with Laya, and draft the digest, nudges and dataset updates for approval. Do not install together with the laya plugin.",
+      "version": "0.1.0"
     }
   ]
 }
